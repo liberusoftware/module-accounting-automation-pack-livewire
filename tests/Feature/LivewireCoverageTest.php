@@ -2,21 +2,22 @@
 
 declare(strict_types=1);
 
-use Illuminate\Auth\Access\AuthorizationException;
 use Liberu\Accounting\AutomationPackLivewire\AutomationPackLivewireServiceProvider;
 use Liberu\Accounting\AutomationPackLivewire\Livewire\Recipes;
 use Liberu\Accounting\Erp\Models\User;
-use Livewire\Livewire;
 
 it('renders accounting-automation-pack-livewire livewire components', function (): void {
     $provider = $this->app->register(AutomationPackLivewireServiceProvider::class, force: true);
-    if (method_exists($provider, 'boot')) { $provider->boot(); }
+    if (method_exists($provider, 'boot')) {
+        $provider->boot();
+    }
     expect($provider)->toBeInstanceOf(AutomationPackLivewireServiceProvider::class);
-
 
     $this->actingAs(User::factory()->create());
 
-    $component = new Recipes;
-    if (method_exists($component, 'mount')) { $component->mount(); }
+    $component = new Recipes();
+    if (method_exists($component, 'mount')) {
+        $component->mount();
+    }
     expect($component->render())->not->toBeNull();
 });
